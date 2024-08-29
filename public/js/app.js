@@ -716,6 +716,45 @@ __webpack_require__.r(__webpack_exports__);
 // Though it says "Rails" it actually works with any framework.
 
 _rails_ujs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
+var url = "/api/session";
+var btnTrue = document.getElementById("set-state-true");
+var btnFalse = document.getElementById("set-state-false");
+btnTrue.addEventListener("click", function (el) {
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      state: true
+    })
+  }).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    console.log('Success:', data);
+    location.reload();
+  })["catch"](function (error) {
+    console.error('Error:', error);
+  });
+});
+btnFalse.addEventListener("click", function (el) {
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      state: false
+    })
+  }).then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    console.log('Success:', data);
+    location.reload();
+  })["catch"](function (error) {
+    console.error('Error:', error);
+  });
+});
 
 /***/ }),
 
