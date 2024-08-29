@@ -7,11 +7,17 @@ class Home::IndexPage < MainLayout
       end
       text context.session.get?(:state) || ""
     end
-    button type: "button", id: "set-state-true" do
-      text "TRUE"
+    button type: "button", id: "set-api-state-true" do
+      text "Api TRUE"
     end
-    button type: "button", id: "set-state-false" do
-      text "FALSE"
+    button type: "button", id: "set-api-state-false" do
+      text "Api FALSE"
+    end
+    button type: "button", id: "set-browser-state-true" do
+      text "Browser TRUE"
+    end
+    button type: "button", id: "set-browser-state-false" do
+      text "Browser FALSE"
     end
   end
 end

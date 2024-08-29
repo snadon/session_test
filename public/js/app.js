@@ -717,16 +717,18 @@ __webpack_require__.r(__webpack_exports__);
 
 _rails_ujs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 var url = "/api/session";
-var btnTrue = document.getElementById("set-state-true");
-var btnFalse = document.getElementById("set-state-false");
-btnTrue.addEventListener("click", function (el) {
+var btnApiTrue = document.getElementById("set-api-state-true");
+var btnApiFalse = document.getElementById("set-api-state-false");
+var btnBrowserTrue = document.getElementById("set-browser-state-true");
+var btnBrowserFalse = document.getElementById("set-browser-state-false");
+var update = function update(el, state) {
   fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      state: true
+      state: state
     })
   }).then(function (response) {
     return response.json();
@@ -736,24 +738,18 @@ btnTrue.addEventListener("click", function (el) {
   })["catch"](function (error) {
     console.error('Error:', error);
   });
+};
+btnApiTrue.addEventListener("click", function (el) {
+  return update(el, true);
 });
-btnFalse.addEventListener("click", function (el) {
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      state: false
-    })
-  }).then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    console.log('Success:', data);
-    location.reload();
-  })["catch"](function (error) {
-    console.error('Error:', error);
-  });
+btnApiFalse.addEventListener("click", function (el) {
+  return update(el, false);
+});
+btnBrowserTrue.addEventListener("click", function (el) {
+  return update(el, true);
+});
+btnBrowserFalse.addEventListener("click", function (el) {
+  return update(el, false);
 });
 
 /***/ }),
