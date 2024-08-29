@@ -716,15 +716,20 @@ __webpack_require__.r(__webpack_exports__);
 // Though it says "Rails" it actually works with any framework.
 
 _rails_ujs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
-var url = "/api/session";
+var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute('content');
+var urlApi = "/api/session";
+var browserApi = "/session";
 var btnApiTrue = document.getElementById("set-api-state-true");
 var btnApiFalse = document.getElementById("set-api-state-false");
 var btnBrowserTrue = document.getElementById("set-browser-state-true");
 var btnBrowserFalse = document.getElementById("set-browser-state-false");
 var update = function update(el, state) {
+  var api = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var url = api ? urlApi : browserApi;
   fetch(url, {
     method: 'POST',
     headers: {
+      'X-CSRF-TOKEN': csrfToken,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
@@ -740,10 +745,10 @@ var update = function update(el, state) {
   });
 };
 btnApiTrue.addEventListener("click", function (el) {
-  return update(el, true);
+  return update(el, true, true);
 });
 btnApiFalse.addEventListener("click", function (el) {
-  return update(el, false);
+  return update(el, false, true);
 });
 btnBrowserTrue.addEventListener("click", function (el) {
   return update(el, true);
